@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="LgTV" class="com.test05prac.LgTV">
+	</bean>
+	<!-- lazy-init 생성자 호출시 생성 -->
+	<bean id="SamsungTV" class="com.test05prac.SamsungTV" lazy-init="true">
+	</bean>
+</beans>
