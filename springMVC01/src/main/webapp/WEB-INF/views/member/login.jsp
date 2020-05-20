@@ -14,14 +14,14 @@
 <div class="memberBox">
 <div class="login">
 <form action="<%=request.getContextPath()%>/member/loginimple.do" method="post">
-	<p>사용자이름</p>
-	<input class="loginText" type="text" name="id"/>
-	<span id="checkMsg" class="checkMsg"></span>
-	<p>비밀번호</p>
-	<input class="loginText" type="password" name="pw"/>
-	<span class="btn">
-		<button>LogIn</button>
-	</span>
+   <p>사용자이름</p>
+   <input class="loginText" type="text" name="id"/>
+   <span id="checkMsg" class="checkMsg"></span>
+   <p>비밀번호</p>
+   <input class="loginText" type="password" name="pw"/>
+   <span class="btn">
+      <button>LogIn</button>
+   </span>
 </form>
 </div>
 </div>
@@ -29,9 +29,9 @@
 <script>
 var flg = ${reCheck};
 if(flg){
-	var msg = ${msg};
-	console.dir(document.querySelector('#checkMsg'));
-	document.querySelector('#checkMsg').textContent = '아이디 혹은 비밀번호를 확인 해주세요';
+   var msg = ${msg};
+   console.dir(document.querySelector('#checkMsg'));
+   document.querySelector('#checkMsg').textContent = '아이디 혹은 비밀번호를 확인 해주세요';
 }
 
 
