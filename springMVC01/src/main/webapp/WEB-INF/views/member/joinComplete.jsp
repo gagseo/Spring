@@ -20,7 +20,7 @@
 	<p><%= id %>님 환영합니다!<br>
 	<br><br>
 	<hr>
-	<a href="index.jsp">메인으로 가기</a>
+	<a href="<%=request.getContextPath()%>/index/index.do">메인으로 가기</a>
 </body>
 </html>
 

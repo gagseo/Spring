@@ -5,10 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/servletBM/resources/css/common.css" />
-<link rel="stylesheet" href="/servletBM/resources/css/css/all.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/common.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/css/all.css" />
 </head>
-<link rel="stylesheet" href="/servletBM/resources/css/Web.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/Web.css" />
 <body>
 <div class="wrap">
 <div class="memberBox">
@@ -27,9 +27,9 @@
 </div>
 </div>
 <script>
-var flg = ${data.reCheck};
+var flg = ${reCheck};
 if(flg){
-	var msg = ${data.msg};
+	var msg = ${msg};
 	console.dir(document.querySelector('#checkMsg'));
 	document.querySelector('#checkMsg').textContent = '아이디 혹은 비밀번호를 확인 해주세요';
 }

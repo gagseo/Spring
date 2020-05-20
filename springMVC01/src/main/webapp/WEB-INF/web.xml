@@ -40,13 +40,16 @@
 	</servlet-mapping>
 
 	<filter>
+	<!-- 스프링이 웹 요청과 응답에 대한 인코딩 처리를 위해 제공해주는 필터 -->
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter
 		</filter-class>
+		<!-- Request 요청 시에 UTF-8로 변환 -->
 		<init-param>
 			<param-name>encoding</param-name>
 			<param-value>UTF-8</param-value>
 		</init-param>
+		<!-- Response 때도 UTF-8로 인코딩 -->
 		<init-param>
 			<param-name>forceEncoding</param-name>
 			<param-value>true</param-value>
