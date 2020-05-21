@@ -11,8 +11,8 @@
 	<h1>회원 가입 양식</h1>
 	<!-- <form action="/jsp1/empJoin.do"
 	      method="post"> -->
-	<form <%-- action="<%=request.getContextPath()%>/member/joinemailCheck.do" --%>
-		 action="<%=request.getContextPath()%>/member/joinimple.do"
+	<form  action="<%=request.getContextPath()%>/member/joinemailCheck.do" 
+		 <%-- action="<%=request.getContextPath()%>/member/joinimple.do" --%>
 		method="post" onsubmit="return validate();">
 		<table>
 			<tr>
