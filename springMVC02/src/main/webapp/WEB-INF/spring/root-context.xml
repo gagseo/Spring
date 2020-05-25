@@ -6,6 +6,7 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<!-- Service, Repository(DAO), DB비지니스 로직과 관련된 설정 -->
 
+
 	<bean id="mailSender"
 		class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com" />

@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,13 +14,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.springmvc.member.model.service.MemberService;
-import com.spring.springmvc.member.model.service.ProxyMemberService;
 import com.spring.springmvc.member.model.vo.Member;
 
 @Controller
 public class MemberController {
 	
-	public MemberService ms = new ProxyMemberService();
+	@Autowired //빈 객체가 들어감
+	public MemberService ms;
 
 	@RequestMapping("/member/join.do")
 	public ModelAndView join() {
@@ -75,10 +76,10 @@ public class MemberController {
 	}
 
 	@RequestMapping("/member/loginimple.do")
-	public ModelAndView loginImple(String id, String pw, HttpSession session) throws SQLException {
+	public ModelAndView loginImple(@RequestParam Map<String, Object> commandMap, HttpSession session) throws SQLException {
 		ModelAndView mav = new ModelAndView();
 
-		Member res = ms.login(id, pw);
+		Member res = ms.login(commandMap);
 
 		if (res == null) {
 			mav.addObject("reCheck", "true");

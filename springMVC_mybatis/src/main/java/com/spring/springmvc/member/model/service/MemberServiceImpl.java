@@ -8,8 +8,6 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
@@ -18,54 +16,38 @@ import org.springframework.stereotype.Service;
 import com.spring.springmvc.member.model.dao.MemberDao;
 import com.spring.springmvc.member.model.vo.Member;
 
-import common.JDBCTemplate;
-
 @Service
-@Scope("request")
 //scope : 빈의 생명주기를 결정
 //	// singleton : singleton 스코프
 // 	// requset : requset 스코프
 //  // session : session 스코프
 public class MemberServiceImpl implements MemberService {
 
-	
-	MemberDao mDao = new MemberDao();
+	@Autowired
+	MemberDao mDao;
 
 	@Autowired
 	JavaMailSender mailSender;
 
 	Connection conn = null;
 
-	JDBCTemplate jdt = JDBCTemplate.getInstance();
-
 	public MemberServiceImpl() {
 
 	}
 
-	public MemberServiceImpl(Connection conn) {
+	public String idCheck(String id) {
 
-		this.conn = conn;
+		return mDao.idCheck(id);
 	}
 
-	public String idCheck(String id) throws SQLException {
+	public int insertMember(Map<String, Object> commandMap) {
 
-		String res = "";
-		res = mDao.idCheck(conn, id);
-		return res;
+		return mDao.insertMember(commandMap);
 	}
 
-	public int insertMember(Map<String, Object> commandMap) throws SQLException {
+	public Member login(Map<String, Object> commandMap) {
 
-		int res = 0;
-		res = mDao.insertMember(conn, commandMap);
-		return res;
-	}
-
-	public Member login(String id, String pw) throws SQLException {
-
-		Member res = null;
-		res = mDao.login(conn, id, pw);
-		return res;
+		return mDao.login(commandMap);
 	}
 
 	public void mailSending(Map<String, Object> commandMap) {
