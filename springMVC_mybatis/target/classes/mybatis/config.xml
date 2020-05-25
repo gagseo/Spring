@@ -5,12 +5,12 @@
 	<typeAliases>
 		<typeAlias
 			type="com.spring.springmvc.member.model.vo.Member" alias="Member" />
-		<!-- <typeAlias type="com.spring.springmvc.book.model.vo.Book"
-			alias="Book" /> -->
+		 <typeAlias type="com.spring.springmvc.book.model.vo.Book"
+			alias="Book" /> 
 	</typeAliases>
 
 	<mappers>
-		<!-- <mapper resource="/mybatis/mapper/bookMapper.xml" /> -->
+		 <mapper resource="/mybatis/mapper/bookMapper.xml" />
 		<mapper resource="/mybatis/mapper/memberMapper.xml" />
 	</mappers>
 

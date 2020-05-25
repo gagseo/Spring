@@ -1,6 +1,5 @@
 package com.spring.springmvc.member.model.service;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Map;
 
@@ -29,20 +28,29 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	JavaMailSender mailSender;
 
-	Connection conn = null;
-
-	public MemberServiceImpl() {
-
-	}
-
 	public String idCheck(String id) {
 
 		return mDao.idCheck(id);
 	}
 
-	public int insertMember(Map<String, Object> commandMap) {
+	// @Transactional
+	// @Transactional(rollbackFor = Exception.class)
+	public int insertMember(Map<String, Object> commandMap) throws SQLException {
 
-		return mDao.insertMember(commandMap);
+		int res = mDao.insertMember(commandMap);
+
+		// 트랜잭션 테스트를 위한 에러코드
+
+		// runtimeException
+		// String str = null;
+		// str.length();
+		// 롤백확인
+
+		// CheckedException
+		// throw new SQLException();
+
+		return res;
+
 	}
 
 	public Member login(Map<String, Object> commandMap) {

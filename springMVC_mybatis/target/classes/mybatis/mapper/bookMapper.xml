@@ -4,7 +4,16 @@
 
 <mapper namespace="Book">
 
-
-
-
+	<select id="selectBookList">
+		select b_title from tb_book where b_title = #{title}
+	</select>
+	
+	<select id="selectInnerBookSearchList">
+		select * from tb_book where b_title like %#{title}%
+	</select>
+	
+	<select id="selectBook">
+		select * from tb_book
+	</select>
+	
 </mapper>
