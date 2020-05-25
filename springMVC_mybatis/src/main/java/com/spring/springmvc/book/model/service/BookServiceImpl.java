@@ -16,18 +16,18 @@ public class BookServiceImpl implements BookService {
 	BookDao bDao;
 
 	@Override
-	public List<Book> selectBookList(String title) {
-		return null;
+	public List<Book> selectBookList(String b_title) {
+		return bDao.selectBookList(b_title);
 	}
 
 	@Override
-	public List<Book> selectInnerBookSearchList(Map<String, Object> commandMap) {
-		return null;
+	public List<Book> selectInnerBookSearchList(String title) {
+		return bDao.selectInnerBookSearchList(title);
 	}
 
 	@Override
 	public Book selectBook(int b_bno) {
-		return null;
+		return bDao.selectBook(b_bno);
 	}
 
 }

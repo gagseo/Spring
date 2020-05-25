@@ -1,7 +1,6 @@
 package com.spring.springmvc.book.model.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +14,15 @@ public class BookDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
-	public List<Book> selectBookList(String title){
+	public List<Book> selectBookList(String b_title){
 		
-		return sqlSessionTemplate.selectOne("Book.selectBookList" , title);
+		return sqlSessionTemplate.selectOne("Book.selectBookList" , b_title);
 		
 	}
 	
-	public List<Book> selectInnerBookSearchList(Map<String, Object> commandMap){
+	public List<Book> selectInnerBookSearchList(String title){
 		
-		return sqlSessionTemplate.selectOne("Book.selectInnerBookSearchList", commandMap);
+		return sqlSessionTemplate.selectOne("Book.selectInnerBookSearchList", title);
 		
 	}
 	

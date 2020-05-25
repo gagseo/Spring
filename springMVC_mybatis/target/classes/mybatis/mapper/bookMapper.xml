@@ -3,17 +3,28 @@
 
 
 <mapper namespace="Book">
+	<resultMap type="Book" id="bookList">
+		<id property="b_bno" column="B_BNO"/>
+		<result property="b_category" column="C_INFO"/>
+		<result property="b_title" column="B_TITLE"/>
+		<result property="b_author" column="B_AUTHOR"/>
+		<result property="b_regdate" column="B_REGDATE"/>
+		<result property="b_rent_yn" column="B_RENT_YN"/>
+		<result property="b_isbn" column="B_ISBN"/>
+	</resultMap>
 
-	<select id="selectBookList">
-		select b_title from tb_book where b_title = #{title}
+
+
+	<select id="selectBookList" resultMap="bookList">
+		select B_BNO, C_INFO, B_TITLE, B_AUTHOR, B_REGDATE, B_RENT_YN, B_ISBN from tb_book b inner join tb_code c on(b.b_category=c.code) where b.b_title like '%'||#{b_title}||'%'
 	</select>
 	
-	<select id="selectInnerBookSearchList">
-		select * from tb_book where b_title like %#{title}%
+	<select id="selectInnerBookSearchList" resultMap="bookList">
+		select B_BNO, C_INFO, B_TITLE, B_AUTHOR, B_REGDATE, B_RENT_YN, B_ISBN from tb_book b inner join tb_code c on(b.b_category=c.code) where b.b_title like '%'||#{title}||'%'
 	</select>
 	
-	<select id="selectBook">
-		select * from tb_book
+	<select id="selectBook" resultMap="bookList">
+		select B_BNO, C_INFO, B_TITLE, B_AUTHOR, B_REGDATE, B_RENT_YN, B_ISBN from tb_book b inner join tb_code c on(b.b_category=c.code) where b_bno = #{b_bno}
 	</select>
 	
 </mapper>
