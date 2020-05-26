@@ -1,30 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
-
-<mapper namespace="Book">
-	<resultMap type="Book" id="bookList">
-		<id property="b_bno" column="B_BNO"/>
-		<result property="b_category" column="C_INFO"/>
-		<result property="b_title" column="B_TITLE"/>
-		<result property="b_author" column="B_AUTHOR"/>
-		<result property="b_regdate" column="B_REGDATE"/>
-		<result property="b_rent_yn" column="B_RENT_YN"/>
-		<result property="b_isbn" column="B_ISBN"/>
-	</resultMap>
-
-
-
-	<select id="selectBookList" resultMap="bookList">
-		select B_BNO, C_INFO, B_TITLE, B_AUTHOR, B_REGDATE, B_RENT_YN, B_ISBN from tb_book b inner join tb_code c on(b.b_category=c.code) where b.b_title like '%'||#{b_title}||'%'
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="Book">
+  
+  	<select id="selectBookList" resultType="Book">
+		select c_info, b_title, b_bno, b_author, b_rent_cnt, b_rent_yn, b_isbn
+		from tb_book
+		inner join tb_code on b_category = c_code
+		where b_rent_yn = 'N'
+		and b_title like '%'||#{title}||'%'
 	</select>
 	
-	<select id="selectInnerBookSearchList" resultMap="bookList">
-		select B_BNO, C_INFO, B_TITLE, B_AUTHOR, B_REGDATE, B_RENT_YN, B_ISBN from tb_book b inner join tb_code c on(b.b_category=c.code) where b.b_title like '%'||#{title}||'%'
-	</select>
 	
-	<select id="selectBook" resultMap="bookList">
-		select B_BNO, C_INFO, B_TITLE, B_AUTHOR, B_REGDATE, B_RENT_YN, B_ISBN from tb_book b inner join tb_code c on(b.b_category=c.code) where b_bno = #{b_bno}
-	</select>
 	
-</mapper>
+	<select id="selectInnerBookSearchList" resultType="Book">
+		select c_info, b_title, b_bno, b_author, b_rent_cnt, b_rent_yn, b_isbn
+		from tb_book
+		inner join tb_code on b_category = c_code
+		
+		<!-- 웨어태그 안에 있으면 동적으로 웨어절을 잡아준다.  -->
+		<where>
+		<!-- b_rent_yn = 'N' -->
+		
+		and b_bno in
+		<!-- 반복문 쓸거다  in으로 해주면 쉼표는 오아로 연결해준다. 인덱스 가 순서이고 오픈이 시작해주는 문자 클로즈가 닫아주는 역할-->
+		<foreach collection="bnoList" item="b_bno" index="i" open="(" close=")" separator=",">
+			#{b_bno}
+		</foreach>
+		<!-- 달러를 쓰면 싱글쿼테이션을 안달아준다 그래서 물음표가 들어가게 된다. 하지만 샵은 떠블 쿼테이션을 붙여준다. -->
+		and b_title like '%'||#{title}||'%'
+		
+<!-- 		<if test="orderBy != null">
+			order by ${orderBy} desc
+		</if> -->
+		</where> 
+		<choose>
+			<when test="orderBy=='B_RENT_CNT'">
+				order by B_RENT_CNT desc
+			</when>
+			
+			<when test="orderBy=='B_ISBN'">
+				order by B_ISBN desc
+			</when>
+			
+			<otherwise>
+				order by b_bno desc
+			</otherwise>
+		
+		</choose>
+		
+		
+		
+	</select>
+  
+  	<select id="selectBook" resultType="Book">
+	  	select c_info, b_title, b_bno, b_author, b_rent_cnt, b_rent_yn, b_isbn
+		from tb_book
+		inner join tb_code on b_category = c_code
+		where b_bno = #{b_bno} 	<!-- 스트링으로 받아도 된다. ${} 이렇게 써라~ -->
+ 	 </select>
+  
+  
+  
+  </mapper>
+  
