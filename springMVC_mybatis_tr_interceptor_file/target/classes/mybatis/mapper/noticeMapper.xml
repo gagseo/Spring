@@ -23,9 +23,9 @@
 
 	<insert id="insertNotice">
 		insert into tb_noitce values(
-		S_NOTICE_IDX.nextval,
+		S_NOTICE.nextval,
 		#{noticeTitle}, sysdate, #{noticeWriter},
-		null, #{noticeContent}
+		null, #{noticeContent}, null, null
 		)
 	</insert>
 
@@ -33,7 +33,7 @@
 		insert into tb_file values(
 		S_TB_FILE_IDX.NEXTVAL
 		,
-		S_NOTICE_IDX.currval
+		S_NOTICE.currval
 		, #{originFileName}
 		, #{renameFileName}
 		,
