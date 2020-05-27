@@ -45,26 +45,30 @@ public class NoticeDao {
 		return sqlSession.insert("Notice.insertFile", file);
 
 	}
-	
+
 	public Notice noticeDetail(int noitceNo) {
-		
+
 		return sqlSession.selectOne("Notice.noticeDetail", noitceNo);
-		
+
+	}
+
+	public List<Map<String, String>> selectFiles(int noticeNo) {
+
+		return sqlSession.selectList("Notice.selectFiles", noticeNo);
+
+	}
+
+	public int deleteNotice(int noticeNo) {
+
+		return sqlSession.delete("Notice.deleteNotice", noticeNo);
+
 	}
 	
-	public List<Map<String, String>> selectFiles(int noitceNo){
+	public int deleteFile(int noticeNo) {
 		
-		return sqlSession.selectOne("Notice.selectFiles", noitceNo);
+		return sqlSession.delete("Notice.deleteFile", noticeNo);
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

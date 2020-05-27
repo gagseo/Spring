@@ -16,4 +16,10 @@ public interface NoticeService {
 	// 파일업로드
 	public int insertFile(List<Map<String, Object>> fileData);
 
+	// 게시물삭제
+	public int deleteNotice(int noticeNo);
+
+	// 파일삭제
+	public void deleteFile(int noticeNo);
+
 }

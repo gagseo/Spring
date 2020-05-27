@@ -22,10 +22,11 @@
 	</select>
 
 	<insert id="insertNotice">
-		insert into tb_noitce values(
+		insert into tb_notice values(
 		S_NOTICE.nextval,
 		#{noticeTitle}, sysdate, #{noticeWriter},
-		null, #{noticeContent}, null, null
+		null, #{noticeContent}, null,
+		null
 		)
 	</insert>
 
@@ -36,8 +37,7 @@
 		S_NOTICE.currval
 		, #{originFileName}
 		, #{renameFileName}
-		,
-		#{savePath}
+		, #{savePath}
 		)
 	</insert>
 
@@ -49,16 +49,26 @@
 	<resultMap type="map" id="fileData">
 		<result column="originFileName" property="originFileName" />
 		<result column="renameFileName" property="renameFileName" />
+		<result column="SAVEPATH" property="SAVEPATH" />
+		<result column="NOTICENO" property="NOTICENO" />
 	</resultMap>
 
 	<select id="selectFiles" resultMap="fileData">
 		select
-		originFileName,
-		renameFileName
+		*
 		from
 		tb_file
-		where noticeNo = #{noticeNo}
+		where
+		noticeNo = #{noticeNo}
 	</select>
+
+	<delete id="deleteNotice">
+		delete from tb_notice where noticeNo = #{noticeNo}
+	</delete>
+
+	<delete id="deleteFile">
+		delete from tb_file where noticeNo = #{noticeNo}
+	</delete>
 
 
 

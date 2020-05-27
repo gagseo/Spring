@@ -37,9 +37,15 @@ public class NoticeServiceImpl implements NoticeService {
 	@Override
 	public Map<String, Object> noticeDetail(int noticeNo) {
 		
+		Map<String, Object> res = new HashMap<String, Object>();
 		
+		Notice notice = nd.noticeDetail(noticeNo);
+		List<Map<String, String>> flist = nd.selectFiles(noticeNo);
 		
-		return null;
+		res.put("notice", notice);
+		res.put("flist", flist);
+		
+		return res;
 	}
 
 	@Override
@@ -74,7 +80,59 @@ public class NoticeServiceImpl implements NoticeService {
 			}
 		}
 		return res;
-
 	}
+
+	@Override
+	public int deleteNotice(int noticeNo) {
+		
+		deleteFile(noticeNo);
+		return nd.deleteNotice(noticeNo);
+		
+	}
+
+	@Override
+	public void deleteFile(int noticeNo) {
+		
+		List<Map<String, String>> files = nd.selectFiles(noticeNo);
+		
+		if(files.size() > 0) {
+			
+			for(Map<String, String> filePath : files) {
+				File file = new File(filePath.get("SAVEPATH"));
+				//delete(즉시삭제), deleteOnExist(JVM이 내려갈 때 삭제)
+				file.delete();
+			}
+			
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
